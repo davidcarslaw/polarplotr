@@ -1,0 +1,24 @@
+Package: polarplotr
+Type: Package
+Title: Functions to plot polarplots
+Version: 0.0.1
+Date: 2016-05-09
+Author: Stuart K. Grange
+Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
+Description: Functions to plot polarplots
+License: GPL (>= 2)
+Depends:
+    stringr,
+    lubridate,
+    plyr,
+    dplyr,
+    mgcv, 
+    lattice,
+    latticeExtra,
+    RColorBrewer,
+    broom, 
+    MASS,
+    quantreg
+LazyLoad: yes
+RoxygenNote: 5.0.1
+Suggests: testthat
