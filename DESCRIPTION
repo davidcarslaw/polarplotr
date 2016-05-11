@@ -1,10 +1,13 @@
 Package: polarplotr
 Type: Package
 Title: Functions to plot polarplots
-Version: 0.0.1
-Date: 2016-05-010
-Author: Stuart K. Grange
+Version: 0.0.2
+Date: 2016-05-11
+Authors@R: c(
+  person("Stuart", "Grange", email = "s.k.grange@gmail.com", role = c("cre", "aut")),
+  person("David", "Carslaw",  email = "david.carslaw@york.ac.uk", role = "aut"))
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
+URL: https://github.com/skgrange/polarplotr
 Description: Functions to plot polarplots
 License: GPL (>= 2)
 Depends:
