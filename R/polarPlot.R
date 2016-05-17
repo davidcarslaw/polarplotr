@@ -400,6 +400,9 @@ polarPlot <-
       
     }
     
+    # Allow for period notation
+    statistic <- stringr::str_replace_all(statistic, "\\.| ", "_")
+    
     # Build vector for many checks
     correlation_stats <- c("r", "slope", "intercept", "robust_slope", 
                            "robust_intercept", "quantile_slope", 

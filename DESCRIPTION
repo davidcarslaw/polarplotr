@@ -1,8 +1,8 @@
 Package: polarplotr
 Type: Package
 Title: Functions to plot polarplots
-Version: 0.0.2
-Date: 2016-05-11
+Version: 0.0.3
+Date: 2016-05-16
 Authors@R: c(
   person("Stuart", "Grange", email = "s.k.grange@gmail.com", role = c("cre", "aut")),
   person("David", "Carslaw",  email = "david.carslaw@york.ac.uk", role = "aut"))
@@ -10,6 +10,7 @@ Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
 URL: https://github.com/skgrange/polarplotr
 Description: Functions to plot polarplots
 License: GPL (>= 2)
+ByteCompile: true
 Depends:
 Imports: 
     stringr,
@@ -24,6 +25,6 @@ Imports:
     broom, 
     MASS,
     quantreg
+Suggests: testthat
 LazyLoad: yes
 RoxygenNote: 5.0.1
-Suggests: testthat
