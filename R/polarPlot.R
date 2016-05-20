@@ -837,7 +837,6 @@ polarPlot <-
       
     }
     
-    
     ## auto-scaling
     nlev <- 200  ## preferred number of intervals
     
@@ -1039,12 +1038,18 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   # Select and filter
   thedata <- select_(mydata, pol_1, pol_2, "weight")
   thedata <- thedata[complete.cases(thedata), ]
-  # thedata <- thedata[thedata$weight >= 0.001, ]
   
   # useful for showing what the weighting looks like as a surface
   # scatterPlot(mydata, x= "ws", y = "wd", z = "weight", method = "level", col = "jet")
   
-  # ggplot(thedata, aes(nv10, v2.5)) + geom_point() +
+  # # Save for plot
+  # mydata %>% 
+  #   select(ws, 
+  #          wd, 
+  #          weight) %>% 
+  #   saveRDS("example_of_weighting_4_8_and_230.rds")
+  # 
+  # ggplot(mydata, aes(ws, wd, colour = weight)) + geom_point(size = 2) +
   #   stat_smooth(method = lm, formula = y ~ x, aes(weight = weight))
   # 
   # ggplot(thedata, aes(nv10, v2.5, colour = weight)) + geom_point() +
@@ -1063,7 +1068,7 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   # Simple least squared regression with weights
   if (statistic %in% c("slope", "intercept")) {
     
-    # Drop dplyr's data frame for formular
+    # Drop dplyr's data frame for formula
     thedata <- data.frame(thedata)
     
     # Calculate model, no warnings on perfect fits.
@@ -1084,44 +1089,21 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   # Robust linear regression with weights
   if (grepl("robust", statistic, ignore.case = TRUE)) {
     
-    # Drop dplyr's data frame for formular
+    # Drop dplyr's data frame for formula
     thedata <- data.frame(thedata)
     
-    # Build model
+    # Build model, optimal method (MM) cannot use weights
     fit <- suppressWarnings(
       MASS::rlm(thedata[, pol_1] ~ thedata[, pol_2], 
-                weights = thedata[, "weight"])
+                weights = thedata[, "weight"], method = "M")
     )
     
-      # Get coefficents
+    # Get coefficents
     fit <- broom::tidy(fit)
 
     # Extract statistics
     if (statistic == "robust_slope") stat_weighted <- fit[2, 2]
     if (statistic == "robust_intercept") stat_weighted <- fit[1, 2]
-    
-    # stat_weighted <- tryCatch({
-    #   
-    #   suppressWarnings(
-    #     MASS::rlm(thedata[, pol_1] ~ thedata[, pol_2], 
-    #               weights = thedata[, "weight"])
-    #   )
-    #   
-    #   # Get coefficents
-    #   fit <- broom::tidy(fit)
-    #   
-    #   # Extract statistics
-    #   if (statistic == "robust_slope") stat_weighted <- fit[2, 2]
-    #   if (statistic == "robust_intercept") stat_weighted <- fit[1, 2]
-    #   
-    #   stat_weighted
-    #   
-    # }, error = function(e) {
-    #   
-    #   # Return
-    #   0
-    #   
-    # })
     
     # Bind together
     result <- data.frame(ws1, wd1, stat_weighted)
@@ -1131,7 +1113,7 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   # Quantile regression with weights
   if (grepl("quantile", statistic, ignore.case = TRUE)) {
     
-    # Drop dplyr's data frame for formular
+    # Drop dplyr's data frame for formula
     thedata <- data.frame(thedata)
     
     # Build model

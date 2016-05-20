@@ -155,7 +155,7 @@ checkPrep <- function(mydata, Names, type, remove.calm = TRUE, remove.neg = TRUE
   
   if (strip.white) {
     ## set panel strip to white
-    suppressWarnings(trellis.par.set(list(strip.background = list(col = "white"))))
+    suppressWarnings(lattice::trellis.par.set(list(strip.background = list(col = "white"))))
   }
   
   
@@ -169,7 +169,7 @@ strip.fun <- function(results.grid, type, auto.text) {
   ## proper names of labelling ###################################################
   pol.name <- sapply(levels(factor(results.grid[[type[1]]])),
                      function(x) quickText(x, auto.text))
-  strip <- strip.custom(factor.levels = pol.name)
+  strip <- lattice::strip.custom(factor.levels = pol.name)
   
   if (length(type) == 1 ) {
     
@@ -179,7 +179,7 @@ strip.fun <- function(results.grid, type, auto.text) {
     
     pol.name <- sapply(levels(factor(results.grid[[type[2]]])),
                        function(x) quickText(x, auto.text))
-    strip.left <- strip.custom(factor.levels = pol.name)
+    strip.left <- lattice::strip.custom(factor.levels = pol.name)
   }
   if (length(type) == 1 & type[1] == "default") strip <- FALSE ## remove strip
   list(strip, strip.left, pol.name)
@@ -1089,12 +1089,12 @@ openColours <- function(scheme = "default", n = 100) {
   schemes <- c("increment", "default", "brewer1", "heat", "jet", "hue", "greyscale", brewer.col)
   
   ## schemes
-  heat <- colorRampPalette(brewer.pal(9, "YlOrRd"), interpolate = "spline")
+  heat <- colorRampPalette(RColorBrewer::brewer.pal(9, "YlOrRd"), interpolate = "spline")
   
   jet <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan",
                             "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
   
-  default.col <- colorRampPalette(brewer.pal(11, "Spectral"), interpolate = "spline")
+  default.col <- colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"), interpolate = "spline")
   
   
   
@@ -1102,11 +1102,11 @@ openColours <- function(scheme = "default", n = 100) {
   brewer1 <- function (n) {
     if (n >= 3 & n <= 9) {
       
-      brewer.pal(n, "Set1")
+      RColorBrewer::brewer.pal(n, "Set1")
       
     } else {
       
-      thefun <- suppressWarnings(colorRampPalette(brewer.pal(9, "Set1"), interpolate = "spline"))
+      thefun <- suppressWarnings(colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"), interpolate = "spline"))
       thefun(n)
     }
     
@@ -1119,11 +1119,11 @@ openColours <- function(scheme = "default", n = 100) {
     
     if (n >= 3 & n <= n.brew) {
       
-      brewer.pal(n, thecol)
+      RColorBrewer::brewer.pal(n, thecol)
       
     } else {
       
-      thefun <- suppressWarnings(colorRampPalette(brewer.pal(n.brew, thecol), interpolate = "spline"))
+      thefun <- suppressWarnings(colorRampPalette(RColorBrewer::brewer.pal(n.brew, thecol), interpolate = "spline"))
       thefun(n)
     }
     
@@ -1409,14 +1409,14 @@ drawOpenKey <- function (key, draw = FALSE, vp = NULL) {
                           at, tick.number = 7, width = 2, height = 1, space = "right",
                           plot.style = c("ticks", "border"),
                           ...) {
-    regions <- trellis.par.get("regions")
+    regions <- lattice::trellis.par.get("regions")
     list(col = col, alpha = alpha, at = at, tick.number = tick.number,
          width = width, height = height, space = space,
          plot.style = plot.style,
          ...)
   }
-  axis.line <- trellis.par.get("axis.line")
-  axis.text <- trellis.par.get("axis.text")
+  axis.line <- lattice::trellis.par.get("axis.line")
+  axis.text <- lattice::trellis.par.get("axis.text")
   key <- do.call("process.key", key)
   
   ###############
