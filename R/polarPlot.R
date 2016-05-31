@@ -318,12 +318,15 @@
 ##'   \code{type}; \code{u} and \code{v}, the translational vectors
 ##'   based on \code{ws} and \code{wd}; and the local \code{pollutant}
 ##'   estimate.
+##'   
 ##' @author David Carslaw
+##' 
 ##' @seealso \code{\link{polarCluster}} for identifying features in 
 ##'   bivairate polar plots and for post processing and 
 ##'   \code{\link{polarAnnulus}}, \code{\link{polarFreq}}, 
 ##'   \code{\link{percentileRose}} for other ways of plotting
 ##'   directional data.
+##'   
 ##' @references
 ##' 
 ##' Ashbaugh, L.L., Malm, W.C., Sadeh, W.Z., 1985. A residence time
@@ -355,9 +358,9 @@
 ##' the impact of large urban airports on local air quality by
 ##' nonparametric regression. Atmospheric Environment 38 (27),
 ##' 4501-4507.
+##' 
 ##' @keywords methods
 ##' @examples
-##' 
 ##' 
 ##' # load example data from package
 ##' data(mydata)
@@ -468,7 +471,6 @@ polarPlot <-
       extra.args$layout <- NULL
     
     ## extract variables of interest
-    
     vars <- c(wd, x, pollutant)
     
     if (any(type %in%  dateTypes)) vars <- c(vars, "date")
@@ -666,7 +668,7 @@ polarPlot <-
         # Get vector
         binned <- binned$stat_weighted
         
-        # A catch
+        # A catch for surface plotting
         binned <- ifelse(binned == Inf, NA, binned)
           
       }
@@ -817,7 +819,7 @@ polarPlot <-
       
       res <- mutate(res, z = z / mean(z, na.rm = TRUE))
       
-      if (missing(key.footer)) key.footer <- "normalised \nlevel"
+      if (missing(key.footer)) key.footer <- "normalised\nlevel"
       
     }
     
@@ -836,6 +838,19 @@ polarPlot <-
       if (length(id) > 0) res$z[id] <- -1
       
     }
+    
+    # Labels for correlation and regression, keep lower case like other labels
+    if (statistic == "r") key.header <- expression(italic("r"))
+    
+    if (statistic == "robust_slope") key.header <- "robust\nslope"
+    
+    if (statistic == "robust_intercept") key.header <- "robust\nintercept"
+    
+    if (statistic == "quantile_slope") 
+      key.header <- paste0("quantile slope\n(tau: ", tau, ")")
+    
+    if (statistic == "quantile_intercept")
+      key.header <- paste0("quantile intercept\n(tau: ", tau, ")")
     
     ## auto-scaling
     nlev <- 200  ## preferred number of intervals
@@ -918,59 +933,73 @@ polarPlot <-
     temp <- paste(type, collapse = "+")
     myform <- formula(paste("z ~ u * v | ", temp, sep = ""))
     
-    Args <- list(x = myform, res, axes = FALSE,
-                 as.table = TRUE,
-                 strip = strip,
-                 strip.left = strip.left,
-                 col.regions = col,
-                 region = TRUE,
-                 aspect = 1,
-                 sub = sub,
-                 par.strip.text = list(cex = 0.8),
-                 scales = list(draw = FALSE),
-                 xlim = c(-upper * 1.025, upper * 1.025),
-                 ylim = c(-upper * 1.025, upper * 1.025),
-                 colorkey = FALSE, legend = legend,
-                 
-                 panel = function(x, y, z, subscripts,...) {
-                   
-                   ## show missing data due to min.bin
-                   if (min.bin > 1)
-                     panel.levelplot(x, y, res$miss,
-                                     subscripts,
-                                     col.regions = mis.col,
-                                     labels = FALSE)
-                   
-                   panel.levelplot(x, y, z,
-                                   subscripts,
-                                   at = col.scale,
-                                   pretty = TRUE,
-                                   col.regions = col,
-                                   labels = FALSE)
-                   
-                   angles <- seq(0, 2 * pi, length = 360)
-                   
-                   sapply(intervals, function(x) 
-                     llines(x * sin(angles), x * cos(angles),
-                            col = "grey", lty = 5))
-                   
-                   
-                   ltext(1.07 * intervals * sin(pi * angle.scale / 180),
-                         1.07 * intervals * cos(pi * angle.scale / 180),
-                         sapply(paste(labels, c("", "", units, rep("", 7))), 
-                                function(x)
-                                  quickText(x, auto.text)) , cex = 0.7, pos = 4)
-                   
-                   ## add axis line to central polarPlot
-                   larrows(-upper, 0, upper, 0, code = 3, length = 0.1)
-                   larrows(0, -upper, 0, upper, code = 3, length = 0.1)
-                   
-                   ltext(upper * -1 * 0.95, 0.07 * upper, "W", cex = 0.7)
-                   ltext(0.07 * upper, upper * -1 * 0.95, "S", cex = 0.7)
-                   ltext(0.07 * upper, upper * 0.95, "N", cex = 0.7)
-                   ltext(upper * 0.95, 0.07 *upper, "E", cex = 0.7)
-                   
-                 })
+    Args <- list(
+      x = myform, res, axes = FALSE,
+      as.table = TRUE,
+      strip = strip,
+      strip.left = strip.left,
+      col.regions = col,
+      region = TRUE,
+      aspect = 1,
+      sub = sub,
+      par.strip.text = list(cex = 0.8),
+      scales = list(draw = FALSE),
+      xlim = c(-upper * 1.025, upper * 1.025),
+      ylim = c(-upper * 1.025, upper * 1.025),
+      colorkey = FALSE, legend = legend,
+      
+      panel = function(x, y, z, subscripts,...) {
+        
+        ## show missing data due to min.bin
+        if (min.bin > 1)
+          panel.levelplot(x, y, res$miss,
+                          subscripts,
+                          col.regions = mis.col,
+                          labels = FALSE)
+        
+        panel.levelplot(x, y, z,
+                        subscripts,
+                        at = col.scale,
+                        pretty = TRUE,
+                        col.regions = col,
+                        labels = FALSE)
+        
+        angles <- seq(0, 2 * pi, length = 360)
+        
+        sapply(intervals, function(x) 
+          llines(x * sin(angles), x * cos(angles),
+                 col = "grey", lty = 5))
+        
+        
+        ltext(1.07 * intervals * sin(pi * angle.scale / 180),
+              1.07 * intervals * cos(pi * angle.scale / 180),
+              sapply(paste(labels, c("", "", units, rep("", 7))), 
+                     function(x)
+                       quickText(x, auto.text)) , cex = 0.7, pos = 4)
+        
+        ## add axis line to central polarPlot
+        larrows(-upper, 0, upper, 0, code = 3, length = 0.1)
+        larrows(0, -upper, 0, upper, code = 3, length = 0.1)
+        
+        ltext(upper * -1 * 0.95, 0.07 * upper, "W", cex = 0.7)
+        ltext(0.07 * upper, upper * -1 * 0.95, "S", cex = 0.7)
+        ltext(0.07 * upper, upper * 0.95, "N", cex = 0.7)
+        ltext(upper * 0.95, 0.07 * upper, "E", cex = 0.7)
+        
+        # Add formula to plot if regression
+        if (grepl("slope|intercept", statistic) & length(pollutant == 2)) {
+          
+          # Build label
+          # To-do: use quickText
+          label_formula <- paste0("Formula:\n", pollutant[1], " ~ ", pollutant[2])
+          
+          # Add to plot
+          ltext(upper * 0.88, 0.95 * upper, label_formula, cex = 0.7)
+          
+        }
+        
+      })
+    
     
     ## reset for extra.args
     Args<- listUpdate(Args, extra.args)
@@ -1005,8 +1034,8 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   
   ws1 <- data[[1]] # centre of ws
   wd1 <- data[[2]] # centre of wd
-  # ws1 <- data[1, 1]
-  # wd1 <- data[1, 2]
+  # ws1 <- data[1310, 1]
+  # wd1 <- data[1310, 2]
   
   # Scale ws
   mydata$ws.scale <- ws_spread * (mydata[[x]] - ws1) /
@@ -1040,20 +1069,7 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   thedata <- thedata[complete.cases(thedata), ]
   
   # useful for showing what the weighting looks like as a surface
-  # scatterPlot(mydata, x= "ws", y = "wd", z = "weight", method = "level", col = "jet")
-  
-  # # Save for plot
-  # mydata %>% 
-  #   select(ws, 
-  #          wd, 
-  #          weight) %>% 
-  #   saveRDS("example_of_weighting_4_8_and_230.rds")
-  # 
-  # ggplot(mydata, aes(ws, wd, colour = weight)) + geom_point(size = 2) +
-  #   stat_smooth(method = lm, formula = y ~ x, aes(weight = weight))
-  # 
-  # ggplot(thedata, aes(nv10, v2.5, colour = weight)) + geom_point() +
-  #   stat_smooth(method = MASS::rlm, formula = y ~ x, aes(weight = weight))
+  # openair::scatterPlot(mydata, x = "ws", y = "wd", z = "weight", method = "level")
   
   if (statistic == "r") {
     

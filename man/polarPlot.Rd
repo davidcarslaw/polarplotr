@@ -361,7 +361,6 @@ Variants on \code{polarPlot} include \code{polarAnnulus} and
 }
 \examples{
 
-
 # load example data from package
 data(mydata)
 
