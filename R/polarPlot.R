@@ -994,7 +994,7 @@ polarPlot <-
           label_formula <- paste0("Formula:\n", pollutant[1], " ~ ", pollutant[2])
           
           # Add to plot
-          ltext(upper * 0.88, 0.95 * upper, label_formula, cex = 0.7)
+          ltext(upper * 0.8, 0.95 * upper, label_formula, cex = 0.7)
           
         }
         
@@ -1031,26 +1031,26 @@ polarPlot <-
 calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws", 
                                           y = "wd", pol_1, pol_2, 
                                           ws_spread, wd_spread, kernel, tau) {
-  
-  ws1 <- data[[1]] # centre of ws
-  wd1 <- data[[2]] # centre of wd
-  # ws1 <- data[1310, 1]
-  # wd1 <- data[1310, 2]
-  
+  # Centres
+  ws1 <- data[[1]]
+  wd1 <- data[[2]]
+
   # Scale ws
   mydata$ws.scale <- ws_spread * (mydata[[x]] - ws1) /
     (max(mydata[[x]], na.rm = TRUE) - min(mydata[[x]], na.rm = TRUE))
   
   # Apply kernel smoother
   mydata$ws.scale <- kernel_smoother(mydata$ws.scale, kernel)
-  # "epanechnikov"
 
   # Scale wd
   mydata$wd.scale <- mydata[[y]] - wd1
   
   # Make non-real scale real
-  mydata$wd.scale <- ifelse(mydata$wd.scale < 0, mydata$wd.scale + 360, mydata$wd.scale)
-  mydata$wd.scale <- ifelse(mydata$wd.scale > 180, mydata$wd.scale -360, mydata$wd.scale)
+  mydata$wd.scale <- ifelse(
+    mydata$wd.scale < 0, mydata$wd.scale + 360, mydata$wd.scale)
+  
+  mydata$wd.scale <- ifelse(
+    mydata$wd.scale > 180, mydata$wd.scale -360, mydata$wd.scale)
   
   # Scale with kernel
   mydata$wd.scale <- wd_spread * mydata$wd.scale * 2 * pi / 360

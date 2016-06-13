@@ -1,8 +1,8 @@
 Package: polarplotr
 Type: Package
 Title: Functions to plot polar-plots
-Version: 0.0.6
-Date: 2016-05-31
+Version: 0.0.7
+Date: 2016-06-13
 Authors@R: c(
   person("David", "Carslaw",  email = "david.carslaw@york.ac.uk", role = "aut"),
   person("Stuart", "Grange", email = "s.k.grange@gmail.com", role = c("cre", "aut")))
