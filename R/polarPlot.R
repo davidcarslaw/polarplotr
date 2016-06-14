@@ -991,7 +991,7 @@ polarPlot <-
           
           # Build label
           # To-do: use quickText
-          label_formula <- paste0("Formula:\n", pollutant[1], " ~ ", pollutant[2])
+          label_formula <- quickText(paste0("Formula:\n", pollutant[1], " ~ ", pollutant[2]))
           
           # Add to plot
           ltext(upper * 0.8, 0.95 * upper, label_formula, cex = 0.7)
