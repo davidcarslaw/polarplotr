@@ -2,7 +2,7 @@
 % Please edit documentation in R/polarPlot.R
 \name{polarPlot}
 \alias{polarPlot}
-\title{Bivariate polar plot with smoothing}
+\title{Function for plotting bivariate polar plots with smoothing.}
 \usage{
 polarPlot(mydata, pollutant = "nox", x = "ws", wd = "wd",
   type = "default", statistic = "mean", resolution = "normal",
@@ -29,7 +29,11 @@ would be expected to have similar concentrations. This saves the
 user stacking the data and it is possible to work with columns
 of data directly. A typical use would be \code{pollutant =
 c("obs", "mod")} to compare two columns \dQuote{obs} (the
-observations) and \dQuote{mod} (modelled values).}
+observations) and \dQuote{mod} (modelled values). When pair-wise 
+statistics such as Pearson correlation and regression techniques 
+are to be plotted, \code{pollutant} takes two elements too. For example, 
+\code{pollutant = c("bc", "pm25")} where \code{"bc"} is a function of 
+\code{"pm25"}.}
 
 \item{x}{Name of variable to plot against wind direction in polar 
 coordinates, the default is wind speed, \dQuote{ws}.}
@@ -159,7 +163,7 @@ directly.}
 \code{openair} \code{openColours} function for more details. For
 user defined the user can supply a list of colour names
 recognised by R (type \code{colours()} to see the full list). An
-example would be \code{cols = c("yellow", "green", "blue")}}
+example would be \code{cols = c("yellow", "green", "blue")}.}
 
 \item{weights}{At the edges of the plot there may only be a few 
 data points in each wind speed-direction interval, which could
@@ -258,6 +262,22 @@ See \code{drawOpenKey} for further details.}
 format pollutant names and units properly e.g.  by subscripting 
 the `2' in NO2.}
 
+\item{ws_spread}{An integer used for the weighting kernel spread for wind
+speed when correlation or regression techniques are used. Default is 
+\code{15}.}
+
+\item{wd_spread}{An integer used for the weighting kernel spread for wind
+direction when correlation or regression techniques are used. Default is
+\code{4}.}
+
+\item{kernel}{Type of kernel used for the weighting procedure for when 
+correlation or regression techniques are used. Only \code{"gaussian"} is 
+supported but this may be enhanced in the future.}
+
+\item{tau}{The quantile to be estimated when \code{statistic} is set to 
+\code{"quantile.slope"}. Default is \code{0.5} which is equal to the median
+and will be ignored if \code{"quantile.slope"} is not used.}
+
 \item{...}{Other graphical parameters passed onto 
 \code{lattice:levelplot} and \code{cutData}. For example, 
 \code{polarPlot} passes the option \code{hemisphere =
@@ -334,7 +354,8 @@ approaches.
 
 Various statistics are possible to consider e.g. mean, maximum, 
 median. \code{statistic = "max"} is often useful for revealing 
-sources.
+sources. Pair-wise statistics between two pollutants can also be 
+calculated.
 
 Wind direction is split up into 10 degree intervals and the other 
 variable (e.g. wind speed) 30 intervals. These 2D bins are then 
@@ -367,19 +388,33 @@ data(mydata)
 # basic plot
 polarPlot(mydata, pollutant = "nox")
 
+\dontrun{
+
 # polarPlots by year on same scale
-\dontrun{polarPlot(mydata, pollutant = "so2", type = "year", main = "polarPlot of so2")}
+polarPlot(mydata, pollutant = "so2", type = "year", main = "polarPlot of so2")
 
 # set minimum number of bins to be used to see if pattern remains similar
-\dontrun{polarPlot(mydata, pollutant = "nox", min.bin = 3)}
+polarPlot(mydata, pollutant = "nox", min.bin = 3)
 
 # plot by day of the week
-
-\dontrun{polarPlot(mydata, pollutant = "pm10", type = "weekday")}
+polarPlot(mydata, pollutant = "pm10", type = "weekday")
 
 # show the 95\% confidence intervals in the surface fitting
-\dontrun{polarPlot(mydata, pollutant = "so2", uncertainty = TRUE)}
+polarPlot(mydata, pollutant = "so2", uncertainty = TRUE)
 
+
+# Pair-wise statistics
+# Pearson correlation
+polarPlot(mydata, pollutant = c("pm25", "pm10"), statistic = "r")
+
+# Robust regression slope, takes a bit of time
+polarPlot(mydata, pollutant = c("pm25", "pm10"), statistic = "robust.slope")
+
+# Least squares regression works too but it is not recommended, use robust
+# regression
+# polarPlot(mydata, pollutant = c("pm25", "pm10"), statistic = "slope")
+
+}
 
 }
 \author{
@@ -415,6 +450,10 @@ Yu, K.N., Cheung, Y.P., Cheung, T., Henry, R.C., 2004. Identifying
 the impact of large urban airports on local air quality by
 nonparametric regression. Atmospheric Environment 38 (27),
 4501-4507.
+
+Grange, S. K., Carslaw, D. C., & Lewis, A. C. 2016. Source apportionment 
+advances with bivariate polar plots, correlation, and regression techniques.
+Atmospheric Environment. Under review.
 }
 \seealso{
 \code{\link{polarCluster}} for identifying features in 
