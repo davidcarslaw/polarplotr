@@ -1,0 +1,52 @@
+---
+title: "**polarplotr**"
+output: 
+  html_document: 
+    theme: cosmo
+    fig_height: 4
+    fig_width: 12
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Infomation
+
+**polarplotr** is an R package which allows to plot bivariate polar plots for air quality time-series data. **polarplotr** started life in the [**openair**](https://github.com/davidcarslaw/openair) R package, but has been pulled from this original package and is now developed as its own package. **polarplotr**'s main function is `polarPlot` and is very useful when exploring and analysis pollutant sources and patterns. 
+
+## Citation
+
+Please cite the **polarplotr** package like this:
+
+```
+David Carslaw and Stuart Grange (2016). polarplotr: Functions to plot polar-plots. https://github.com/skgrange/polarplotr
+```
+
+For for LaTeX users:
+
+```
+@Manual{,
+  title = {polarplotr: Functions to plot polar-plots},
+  author = {David Carslaw and Stuart Grange},
+  year = {2016},
+  url = {https://github.com/skgrange/polarplotr},
+}
+```
+
+## Some examples
+
+A simple example using York Fishergate, a roadside site in York, North Yorkshire, United Kingdom. 
+
+```{r, echo = TRUE, cache = TRUE, message = FALSE, fig.width = 7}
+# Load packages
+library(openair)
+library(polarplotr)
+
+# Get some data
+data_yk11 <- importAURN("yk11", 2014)
+
+# Plot
+polarPlot(data_yk11, "nox")
+polarPlot(data_yk11, "pm10")
+```
