@@ -1,8 +1,8 @@
 Package: polarplotr
 Type: Package
 Title: Functions to plot polar-plots
-Version: 0.0.9
-Date: 2016-08-18
+Version: 0.0.10
+Date: 2016-08-31
 Authors@R: c(
   person("David", "Carslaw",  email = "david.carslaw@york.ac.uk", role = "aut"),
   person("Stuart", "Grange", email = "s.k.grange@gmail.com", role = c("cre", "aut")))
@@ -23,7 +23,8 @@ Imports:
     RColorBrewer,
     broom, 
     MASS,
-    quantreg
+    quantreg,
+    viridis
 Suggests: testthat
 LazyLoad: yes
 RoxygenNote: 5.0.1

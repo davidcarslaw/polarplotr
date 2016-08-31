@@ -1086,7 +1086,8 @@ openColours <- function(scheme = "default", n = 100) {
   brewer.n <- c(rep(9, 18), rep(9, 9), c(8, 8, 12, 9, 8, 9, 8, 12))
   
   ## predefined schemes
-  schemes <- c("increment", "default", "brewer1", "heat", "jet", "hue", "greyscale", brewer.col)
+  schemes <- c("increment", "default", "brewer1", "heat", "jet", "hue", "
+               greyscale", brewer.col)
   
   ## schemes
   heat <- colorRampPalette(RColorBrewer::brewer.pal(9, "YlOrRd"), interpolate = "spline")
@@ -1094,7 +1095,8 @@ openColours <- function(scheme = "default", n = 100) {
   jet <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan",
                             "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
   
-  default.col <- colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"), interpolate = "spline")
+  default.col <- colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"), 
+                                  interpolate = "spline")
   
   
   
@@ -1106,7 +1108,11 @@ openColours <- function(scheme = "default", n = 100) {
       
     } else {
       
-      thefun <- suppressWarnings(colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"), interpolate = "spline"))
+      thefun <- suppressWarnings(
+        colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"), 
+                         interpolate = "spline")
+        )
+      
       thefun(n)
     }
     

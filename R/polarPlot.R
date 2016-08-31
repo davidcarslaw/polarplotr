@@ -149,7 +149,8 @@
 #'   values close to a wind speed-direction interval. Kernel
 #'   weighting is used to ensure that all data are used rather than
 #'   relying on the potentially small number of values in a wind
-#'   speed-direction interval.
+#'   speed-direction interval. \code{"robust.slope"} is another option for
+#'   pair-wise statisitics. 
 #'   
 #' @param resolution Two plot resolutions can be set: \dQuote{normal}
 #'   (the default) and \dQuote{fine}, for a smoother plot. It should
@@ -216,7 +217,10 @@
 #'   \code{openair} \code{openColours} function for more details. For
 #'   user defined the user can supply a list of colour names
 #'   recognised by R (type \code{colours()} to see the full list). An
-#'   example would be \code{cols = c("yellow", "green", "blue")}.
+#'   example would be \code{cols = c("yellow", "green", "blue")}. \code{cols} 
+#'   can also take the values \code{"viridis"}, \code{"magma"}, \code{"inferno"}, 
+#'   or \code{"plasma"} which are the viridis colour maps ported from Python's
+#'   Matplotlib library.
 #'   
 #' @param weights At the edges of the plot there may only be a few 
 #'   data points in each wind speed-direction interval, which could
@@ -963,7 +967,22 @@ polarPlot <-
     
     nlev2 <- length(breaks)
     
-    col <- openColours(cols, (nlev2 - 1))
+    # Colour handling
+    # Use the viridis colour maps
+    if (cols[1] %in% c("viridis", "magma", "inferno", "plasma")) {
+      
+      # The functions
+      if (cols[1] == "viridis") col <- viridis::viridis(n = nlev2 - 1)
+      if (cols[1] == "magma") col <- viridis::magma(n = nlev2 - 1)
+      if (cols[1] == "inferno") col <- viridis::inferno(n = nlev2 - 1)
+      if (cols[1] == "plasma") col <- viridis::plasma(n = nlev2 - 1)
+      
+    } else {
+      
+      # Use david's function
+      col <- openColours(cols, (nlev2 - 1))
+      
+    }
     
     col.scale <- breaks
     

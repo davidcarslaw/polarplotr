@@ -96,7 +96,8 @@ variable (by default wind speed). More weight is assigned to
 values close to a wind speed-direction interval. Kernel
 weighting is used to ensure that all data are used rather than
 relying on the potentially small number of values in a wind
-speed-direction interval.}
+speed-direction interval. \code{"robust.slope"} is another option for
+pair-wise statisitics.}
 
 \item{resolution}{Two plot resolutions can be set: \dQuote{normal}
 (the default) and \dQuote{fine}, for a smoother plot. It should
@@ -163,7 +164,10 @@ directly.}
 \code{openair} \code{openColours} function for more details. For
 user defined the user can supply a list of colour names
 recognised by R (type \code{colours()} to see the full list). An
-example would be \code{cols = c("yellow", "green", "blue")}.}
+example would be \code{cols = c("yellow", "green", "blue")}. \code{cols} 
+can also take the values \code{"viridis"}, \code{"magma"}, \code{"inferno"}, 
+or \code{"plasma"} which are the viridis colour maps ported from Python's
+Matplotlib library.}
 
 \item{weights}{At the edges of the plot there may only be a few 
 data points in each wind speed-direction interval, which could
