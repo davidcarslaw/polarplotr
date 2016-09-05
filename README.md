@@ -10,5 +10,5 @@ The development version:
 
 ```
 # Install
-devtools::install_github("skgrange/polarplotr")
+devtools::install_github("davidcarslaw/polarplotr")
 ```
