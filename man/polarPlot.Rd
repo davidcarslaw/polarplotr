@@ -386,37 +386,36 @@ Variants on \code{polarPlot} include \code{polarAnnulus} and
 }
 \examples{
 
-# load example data from package
-data(mydata)
+# Use openair 'mydata'
 
 # basic plot
-polarPlot(mydata, pollutant = "nox")
+polarPlot(openair::mydata, pollutant = "nox")
 
 \dontrun{
 
 # polarPlots by year on same scale
-polarPlot(mydata, pollutant = "so2", type = "year", main = "polarPlot of so2")
+polarPlot(openair::mydata, pollutant = "so2", type = "year", main = "polarPlot of so2")
 
 # set minimum number of bins to be used to see if pattern remains similar
-polarPlot(mydata, pollutant = "nox", min.bin = 3)
+polarPlot(openair::mydata, pollutant = "nox", min.bin = 3)
 
 # plot by day of the week
-polarPlot(mydata, pollutant = "pm10", type = "weekday")
+polarPlot(openair::mydata, pollutant = "pm10", type = "weekday")
 
 # show the 95\% confidence intervals in the surface fitting
-polarPlot(mydata, pollutant = "so2", uncertainty = TRUE)
+polarPlot(openair::mydata, pollutant = "so2", uncertainty = TRUE)
 
 
 # Pair-wise statistics
 # Pearson correlation
-polarPlot(mydata, pollutant = c("pm25", "pm10"), statistic = "r")
+polarPlot(openair::mydata, pollutant = c("pm25", "pm10"), statistic = "r")
 
 # Robust regression slope, takes a bit of time
-polarPlot(mydata, pollutant = c("pm25", "pm10"), statistic = "robust.slope")
+polarPlot(openair::mydata, pollutant = c("pm25", "pm10"), statistic = "robust.slope")
 
 # Least squares regression works too but it is not recommended, use robust
 # regression
-# polarPlot(mydata, pollutant = c("pm25", "pm10"), statistic = "slope")
+# polarPlot(openair::mydata, pollutant = c("pm25", "pm10"), statistic = "slope")
 
 }
 
