@@ -26,6 +26,5 @@ Imports:
     quantreg,
     reshape2,
     viridis
-Suggests: testthat
 LazyLoad: yes
 RoxygenNote: 5.0.1
