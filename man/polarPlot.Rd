@@ -370,7 +370,7 @@ These plots often show interesting features at higher wind speeds
 measurements and therefore greater uncertainty in the calculation 
 of the surface. There are several ways in which this issue can be 
 tackled. First, it is possible to avoid smoothing altogether and 
-use \code{\link{polarFreq}}. Second, the effect of setting a 
+use \code{polarFreq} in the package \code{openair}. Second, the effect of setting a 
 minimum number of measurements in each wind speed-direction bin 
 can be examined through \code{min.bin}. It is possible that a 
 single point at high wind speed conditions can strongly affect the
@@ -460,11 +460,7 @@ advances with bivariate polar plots, correlation, and regression techniques.
 Atmospheric Environment. Under review.
 }
 \seealso{
-\code{\link{polarCluster}} for identifying features in 
-  bivairate polar plots and for post processing and 
-  \code{\link{polarAnnulus}}, \code{\link{polarFreq}}, 
-  \code{\link{percentileRose}} for other ways of plotting
-  directional data.
+The openair package for many more functions for analysing air pollution data.
 }
 \keyword{methods}
 

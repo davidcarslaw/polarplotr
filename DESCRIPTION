@@ -7,7 +7,7 @@ Authors@R: c(
   person("David", "Carslaw",  email = "david.carslaw@york.ac.uk", role = "aut"),
   person("Stuart", "Grange", email = "s.k.grange@gmail.com", role = c("cre", "aut")))
 URL: https://github.com/skgrange/polarplotr
-Description: Flexible functions to produce bivariate polar plots for air pollution data analysis
+Description: Flexible functions to produce bivariate polar plots for air pollution data analysis. Polar plots can be produced using different aggregation statistics, Conditional Probability Functions and pairwise statistics such as correlation, ordinary linear regression and robus regression.
 License: GPL (>= 2)
 ByteCompile: true
 Depends:
@@ -16,6 +16,7 @@ Imports:
     lubridate,
     plyr,
     dplyr,
+    openair,
     mgcv, 
     lattice,
     latticeExtra,
@@ -24,6 +25,7 @@ Imports:
     broom, 
     MASS,
     quantreg,
+    reshape2,
     viridis
 Suggests: testthat
 LazyLoad: yes
