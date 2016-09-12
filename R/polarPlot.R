@@ -401,6 +401,10 @@
 #' atmospheric concentrations on wind direction. Atmospheric 
 #' Environment 36 (13), 2237-2244.
 #' 
+#' Uria-Tellaetxe, I. and D.C. Carslaw (2014). Source identification 
+#' using a conditional bivariate Probability function.  
+#' Environmental Modelling & Software, Vol. 59, 1-9. 
+#' 
 #' Westmoreland, E.J., N. Carslaw, D.C. Carslaw, A. Gillah and E.
 #' Bates (2007).  Analysis of air quality within a street canyon 
 #' using statistical and dispersion modelling techniques. Atmospheric
