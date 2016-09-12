@@ -350,6 +350,9 @@
 #' @import dplyr
 #' @importFrom reshape2 melt
 #' @importFrom openair drawOpenKey cutData openColours quickText
+#' @importFrom graphics plot
+#' @importFrom stats complete.cases formula lm median na.omit quantile sd
+#' @importFrom utils modifyList
 #' 
 #' @return As well as generating the plot itself, \code{polarPlot} 
 #'   also returns an object of class ``openair''. The object includes
