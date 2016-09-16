@@ -15,7 +15,7 @@ devtools::install_github("davidcarslaw/polarplotr")
 
 ## Use
 
-At some point in the near future the existing `polarPlot` function in **openair** will be removed and the `polarplotr` version, which has more capabilities used instead. In teh meantime it is best to load `polarplotr` *after* `openair` i.e.
+At some point in the near future the existing `polarPlot` function in **openair** will be removed and the `polarplotr` version, which has more capabilities used instead. In teh meantime it is best to load **polarplotr** *after* **openair** i.e.
 
 ```
 library(openair)
