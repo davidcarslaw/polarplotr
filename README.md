@@ -1,15 +1,20 @@
 # **polarplotr**
 
-Functions to plot bivariate polar plots. **polarplotr** uses [openair](https://github.com/davidcarslaw/openair) functions but they have been enhanced to do consider pair-wise statistics to compare two pollutants through correlation and regression.
+Functions to plot bivariate polar plots for air pollution data analysis. **polarplotr** uses [openair](https://github.com/davidcarslaw/openair) functions but they have been enhanced to do consider pair-wise statistics to compare two pollutants through correlation and regression.
 
-A publication is to come and more information can be found [here](http://davidcarslaw.github.io/polarplotr/docs/). 
+An accompanying publication outlining the package developments can be found [here](http://www.sciencedirect.com/science/article/pii/S1352231016307166). The package documentation is in development and can be found [here](http://davidcarslaw.github.io/polarplotr/docs/). 
 
 ## Installation
 
-The development version: 
+**polarplotr** has not been released on CRAN yet, therefore the development version must be installed. The best way to do this is to install the **devtools** package and use the `install_github` function. However, if you are using a Windows system, [Rtools](https://cran.r-project.org/bin/windows/Rtools/) needs to be installed before installation of **devtools** is attempted. For macOS and Linux systems, this step is not needed and to install **polarplotr**, do this: 
 
 ```
-# Install
+# If needed, install Rtools
+
+# If needed, install devtools
+install.packages("devtools")
+
+# Install development version of polarplotr
 devtools::install_github("davidcarslaw/polarplotr")
 ```
 
@@ -20,4 +25,21 @@ At some point in the near future the existing `polarPlot` function in **openair*
 ```
 library(openair)
 library(polarplotr)
+```
+
+**polarplotr** main function is `polarPlot` and the usage is the same as for **openair**'s version. To use the enhancements of pair-wise statistics, a pair of pollutants is needed and the statistic argument differs. The function's help contains details on these options. 
+
+```
+# Import air quality data for London Marylebone Road
+data_mary <- importAURN(site = "my1", year = 2013, verbose = FALSE)
+
+# Plot a "standard" polar plot
+polarPlot(data_mary, pollutant = "no2", statistic = "mean")
+
+# Plot correlation of particlate species
+polarPlot(data_mary, pollutant = c("pm2.5", "pm10"), statistic = "r")
+
+# How about the slope, with a newer colour map, will take a minute or two...
+polarPlot(data_mary, pollutant = c("pm2.5", "pm10"), statistic = "robust_slope",
+          cols = "inferno")
 ```
