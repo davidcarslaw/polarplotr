@@ -1,6 +1,6 @@
 # **polarplotr**
 
-Functions to plot bivariate polar plots for air pollution data analysis. **polarplotr** uses [openair](https://github.com/davidcarslaw/openair) functions but they have been enhanced to do consider pair-wise statistics to compare two pollutants through correlation and regression.
+Functions to plot bivariate polar plots for air pollution data analysis. **polarplotr** uses [**openair**](https://github.com/davidcarslaw/openair) functions but they have been enhanced to consider pair-wise statistics to compare two pollutants through correlation and regression.
 
 An accompanying publication outlining the package developments can be found [here](http://www.sciencedirect.com/science/article/pii/S1352231016307166). The package documentation is in development and can be found [here](http://davidcarslaw.github.io/polarplotr/docs/). 
 
