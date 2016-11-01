@@ -146,18 +146,20 @@
 #'   1985). Note that percentile intervals can also be considered; 
 #'   see \code{percentile} for details.
 #'   
-#'   When \code{statistic = "r"}, the Pearson correlation coefficient
-#'   is calculated for \emph{two} pollutants. The calculation
-#'   involves a weighted Pearson correlation coefficient, which is
-#'   weighted by Gaussian kernels for wind direction an the radial
-#'   variable (by default wind speed). More weight is assigned to
-#'   values close to a wind speed-direction interval. Kernel
-#'   weighting is used to ensure that all data are used rather than
-#'   relying on the potentially small number of values in a wind
-#'   speed-direction interval. \code{"robust.slope"} is another option for
-#'   pair-wise statisitics. 
-#'   
-#' @param resolution Two plot resolutions can be set: \dQuote{normal}
+#' When \code{statistic = "r"}, the Pearson correlation coefficient is
+#' calculated for \emph{two} pollutants. The calculation involves a
+#' weighted Pearson correlation coefficient, which is weighted by
+#' Gaussian kernels for wind direction an the radial variable (by
+#' default wind speed). More weight is assigned to values close to a
+#' wind speed-direction interval. Kernel weighting is used to ensure
+#' that all data are used rather than relying on the potentially small
+#' number of values in a wind speed-direction interval.
+#' \code{"robust.slope"} is another option for pair-wise statisitics
+#' and \code{"quantile.slope"}, which uses quantile regression to
+#' estimate the slope for a particular quantile level (see also
+#' \code{tau} for setting the quantile level).
+#' 
+#' @param resolution Two plot resolutions can be set: \dQuote{normal} 
 #'   (the default) and \dQuote{fine}, for a smoother plot. It should
 #'   be noted that plots with a \dQuote{fine} resolution can take
 #'   longer to render and the default option should be sufficient or
