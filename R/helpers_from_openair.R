@@ -142,7 +142,7 @@ checkPrep <- function(mydata, Names, type, remove.calm = TRUE, remove.neg = TRUE
     
     ## daylight saving time can cause terrible problems - best avoided!!
     
-    if (any(dst(mydata$date))) {
+    if (any(lubridate::dst(mydata$date))) {
       warning("Detected data with Daylight Saving Time, converting to UTC/GMT")
       mydata$date <- lubridate::force_tz(mydata$date, tzone = "GMT")
       

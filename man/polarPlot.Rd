@@ -361,7 +361,12 @@ median. \code{statistic = "max"} is often useful for revealing
 sources. Pair-wise statistics between two pollutants can also be 
 calculated.
 
-Wind direction is split up into 10 degree intervals and the other 
+The function can also be used to compare two pollutant species
+through a range of pair-wise statistics (see help on
+\code{statistic}) and Grange et al. (2016) (open-access publication
+link below).
+
+Wind direction is split up into 10 degree intervals and the other
 variable (e.g. wind speed) 30 intervals. These 2D bins are then 
 used to calculate the statistics.
 
@@ -460,7 +465,7 @@ nonparametric regression. Atmospheric Environment 38 (27),
 
 Grange, S. K., Carslaw, D. C., & Lewis, A. C. 2016. Source apportionment 
 advances with bivariate polar plots, correlation, and regression techniques.
-Atmospheric Environment. Under review.
+Atmospheric Environment. 145, 128-134. \url{http://www.sciencedirect.com/science/article/pii/S1352231016307166}
 }
 \seealso{
 The openair package for many more functions for analysing air pollution data.
