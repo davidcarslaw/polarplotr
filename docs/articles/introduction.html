@@ -46,172 +46,38 @@
 <div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h2>
-<p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
+<p>This document considers the use of bivariate polar plots applied to air pollution problems.</p>
+<p>The <code>polarPlot</code> function plots a <em>bivariate polar plot</em> of concentrations. Concentrations are shown to vary by wind speed and wind direction.</p>
+<p>For many, maybe most situations, increasing wind speed generally results in lower concentrations due to increased dilution through advection and increased mechanical turbulence. There are, however, many processes that can lead to interesting concentration-wind speed dependencies and we will provide a more theoretical treatment of this in due course. However, below are a few reasons why concentrations can change with increasing wind speeds.</p>
+<ul><li><p>Buoyant plumes from tall stacks can be brought down to ground-level resulting in high concentrations under high wind speed conditions.</p></li>
+<li><p>Particle suspension increases with increasing wind speeds e.g. from spoil heaps and the like.</p></li>
+<li><p>`Particle&rsquo; suspension can be important close to coastal areas where higher wind speeds generate more sea spray.</p></li>
+<li><p>The wind speed dependence of concentrations in a street canyon can be very complex: higher wind speeds do not always results in lower concentrations due to re-circulation. Bivariate polar plots are very good at revealing these complexities.</p></li>
+<li><p>As  showed, aircraft emissions have an unusual wind speed dependence and this can help distinguish them from other sources. If several measurement sites are available, polar plots can be used to triangulate different sources.</p></li>
+<li><p>Concentrations of can increase with increasing wind speed &mdash; or at least not decline steeply due to increased mixing. This mixing can result in -rich air converting NO to .</p></li>
+</ul><p>The function has been developed to allow variables other than wind speed to be plotted with wind direction in polar coordinates. The key issue is that the other variable plotted against wind direction should be discriminating in some way. For example, temperature can help reveal high-level sources brought down to ground level in unstable atmospheric conditions, or show the effect a source emission dependent on temperature e.g.&nbsp;biogenic isoprene. For research applications where many more variables could be available, discriminating sources by these other variables could be very insightful.</p>
+<p>Bivariate polar plots are constructed in the following way. First, wind speed, wind direction and concentration data are partitioned into wind speed-direction bins and the mean concentration calculated for each bin. Testing on a wide range of data suggests that wind direction intervals at 10~degrees and 30 wind speed intervals capture sufficient detail of the concentration distribution. The wind direction data typically available are generally rounded to 10~degrees and for typical surface measurements of wind speed in the range 0 to 20 to 30~, intervals greater than 30 would be difficult to justify based on a consideration of the accuracy of the instruments. Binning the data in this way is not strictly necessary but acts as an effective data reduction technique without affecting the fidelity of the plot itself. Furthermore, because of the inherent wind direction variability in the atmosphere, data from several weeks, months or years typically used to construct a bivariate polar plot tends to be diffuse and does not vary abruptly with either wind direction or speed and more finely resolved bin sizes or working with the raw data directly does not yield more information.</p>
 </div>
-<div id="styles" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#styles" class="anchor"> </a></body></html>Styles</h2>
+<div id="example-of-use" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#example-of-use" class="anchor"> </a></body></html>Example of use</h2>
 <p>The <code>html_vignette</code> template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:</p>
 <pre><code>output: 
   rmarkdown::html_vignette:
     css: mystyles.css</code></pre>
 </div>
-<div id="figures" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#figures" class="anchor"> </a></body></html>Figures</h2>
-<p>The figure sizes have been customised so that you can easily put two images side-by-side.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
-<div class="figure">
-<img src="introduction_files/figure-html/unnamed-chunk-1-1.png" alt="My Figure." width="672"><p class="caption">
-My Figure.
-</p>
+<div id="conditional-probability-function" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#conditional-probability-function" class="anchor"> </a></body></html>Conditional Probability Function</h2>
 </div>
-<p>You can enable figure captions by <code>fig_caption: yes</code> in YAML:</p>
-<pre><code>output:
-  rmarkdown::html_vignette:
-    fig_caption: yes</code></pre>
-<p>Then you can use the chunk option <code>fig.cap = "Your figure caption."</code> in <strong>knitr</strong>.</p>
+<div id="comparing-two-pollutants" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#comparing-two-pollutants" class="anchor"> </a></body></html>Comparing two pollutants</h2>
 </div>
-<div id="more-examples" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#more-examples" class="anchor"> </a></body></html>More Examples</h2>
-<p>You can write math expressions, e.g. <span class="math inline">\(Y = X\beta + \epsilon\)</span>, footnotes<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, and tables, e.g.&nbsp;using <code>knitr::kable()</code>.</p>
-<table class="table"><thead><tr class="header"><th></th>
-<th align="right">mpg</th>
-<th align="right">cyl</th>
-<th align="right">disp</th>
-<th align="right">hp</th>
-<th align="right">drat</th>
-<th align="right">wt</th>
-<th align="right">qsec</th>
-<th align="right">vs</th>
-<th align="right">am</th>
-<th align="right">gear</th>
-<th align="right">carb</th>
-</tr></thead><tbody><tr class="odd"><td>Mazda RX4</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.620</td>
-<td align="right">16.46</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr><tr class="even"><td>Mazda RX4 Wag</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.875</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr><tr class="odd"><td>Datsun 710</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">108.0</td>
-<td align="right">93</td>
-<td align="right">3.85</td>
-<td align="right">2.320</td>
-<td align="right">18.61</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
-</tr><tr class="even"><td>Hornet 4 Drive</td>
-<td align="right">21.4</td>
-<td align="right">6</td>
-<td align="right">258.0</td>
-<td align="right">110</td>
-<td align="right">3.08</td>
-<td align="right">3.215</td>
-<td align="right">19.44</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr><tr class="odd"><td>Hornet Sportabout</td>
-<td align="right">18.7</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">175</td>
-<td align="right">3.15</td>
-<td align="right">3.440</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">2</td>
-</tr><tr class="even"><td>Valiant</td>
-<td align="right">18.1</td>
-<td align="right">6</td>
-<td align="right">225.0</td>
-<td align="right">105</td>
-<td align="right">2.76</td>
-<td align="right">3.460</td>
-<td align="right">20.22</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr><tr class="odd"><td>Duster 360</td>
-<td align="right">14.3</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">245</td>
-<td align="right">3.21</td>
-<td align="right">3.570</td>
-<td align="right">15.84</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">4</td>
-</tr><tr class="even"><td>Merc 240D</td>
-<td align="right">24.4</td>
-<td align="right">4</td>
-<td align="right">146.7</td>
-<td align="right">62</td>
-<td align="right">3.69</td>
-<td align="right">3.190</td>
-<td align="right">20.00</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr><tr class="odd"><td>Merc 230</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">140.8</td>
-<td align="right">95</td>
-<td align="right">3.92</td>
-<td align="right">3.150</td>
-<td align="right">22.90</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr><tr class="even"><td>Merc 280</td>
-<td align="right">19.2</td>
-<td align="right">6</td>
-<td align="right">167.6</td>
-<td align="right">123</td>
-<td align="right">3.92</td>
-<td align="right">3.440</td>
-<td align="right">18.30</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr></tbody></table><p>Also a quote using <code>&gt;</code>:</p>
-<blockquote>
-<p>&ldquo;He who gives up [code] safety for [code] speed deserves neither.&rdquo; (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
-</div>
-<div class="footnotes">
-<hr><ol><li id="fn1"><p>A footnote here.<a href="#fnref1">&#8617;</a></p></li>
+<div id="references" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#references" class="anchor"> </a></body></html>References</h2>
+<ol style="list-style-type: decimal"><li><p>Carslaw, D.C., Beevers, S.D, Ropkins, K and M.C. Bell (2006). Detecting and quantifying aircraft and other on-airport contributions to ambient nitrogen oxides in the vicinity of a large international airport. Atmospheric Environment. 40/28 pp 5424-5434.</p></li>
+<li><p>Carslaw, D.C., &amp; Beevers, S.D. (2013). Characterising and understanding emission sources using bivariate polar plots and k-means clustering. Environmental Modelling &amp; Software, 40, 325-329. <a href="doi:10.1016/j.envsoft.2012.09.005" class="uri">doi:10.1016/j.envsoft.2012.09.005</a></p></li>
+<li><p>Uria-Tellaetxe, I. and D.C. Carslaw (2014). Source identification using a conditional bivariate Probability function. Environmental Modelling &amp; Software, Vol. 59, 1-9. <a href="http://www.sciencedirect.com/science/article/pii/S1364815214001339">open access version</a>.</p></li>
+<li><p>Westmoreland, E.J., N. Carslaw, D.C. Carslaw, A. Gillah and E. Bates (2007). Analysis of air quality within a street canyon using statistical and dispersion modelling techniques. Atmospheric Environment. Vol. 41(39), pp.&nbsp;9195-9205.</p></li>
+<li><p>Grange, S. K., Lewis, A. C. and D. C. Carslaw (2016). Source apportionment advances with bivariate polar plots, correlation, and regression techniques. Atmospheric Environment. 145, 128-134. <a href="http://www.sciencedirect.com/science/article/pii/S1352231016307166">open access version</a>.</p></li>
 </ol></div>
 </div>
   </div>
@@ -220,9 +86,10 @@ My Figure.
         <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked"><li><a href="#introduction">Introduction</a></li>
-      <li><a href="#styles">Styles</a></li>
-      <li><a href="#figures">Figures</a></li>
-      <li><a href="#more-examples">More Examples</a></li>
+      <li><a href="#example-of-use">Example of use</a></li>
+      <li><a href="#conditional-probability-function">Conditional Probability Function</a></li>
+      <li><a href="#comparing-two-pollutants">Comparing two pollutants</a></li>
+      <li><a href="#references">References</a></li>
       </ul></div>
       </div>
 

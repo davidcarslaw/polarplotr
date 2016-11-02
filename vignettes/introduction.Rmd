@@ -14,9 +14,78 @@ vignette: >
 
 ## Introduction
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+This document considers the use of bivariate polar plots applied to air pollution problems.
 
-## Styles
+The `polarPlot` function plots a *bivariate polar plot* of
+concentrations. Concentrations are shown to vary by wind speed and
+wind direction. 
+
+For many, maybe most situations, increasing wind speed generally
+results in lower concentrations due to increased dilution through
+advection and increased mechanical turbulence. There are, however,
+many processes that can lead to interesting concentration-wind speed
+dependencies and we will provide a more theoretical treatment of this
+in due course. However, below are a few reasons why concentrations can
+change with increasing wind speeds.
+
+
+- Buoyant plumes from tall stacks can be brought down to
+  ground-level resulting in high concentrations under high wind speed
+  conditions.
+
+- Particle suspension increases with increasing wind speeds
+  e.g. \pmten from spoil heaps and the like.
+
+- `Particle' suspension can be important close to coastal areas
+  where higher wind speeds generate more sea spray.
+
+- The wind speed dependence of concentrations in a street canyon
+  can be very complex: higher wind speeds do not always results in
+  lower concentrations due to re-circulation. Bivariate polar plots are
+  very good at revealing these complexities.
+
+- As \textcite{Carslaw2006a} showed, aircraft emissions have an unusual
+  wind speed dependence and this can help distinguish them from other
+  sources. If several measurement sites are available, polar plots can
+  be used to triangulate different sources.
+
+- Concentrations of \notwo can increase with increasing wind speed
+  --- or at least not decline steeply due to increased mixing. This
+  mixing can result in \ozone-rich air converting NO to \notwo.
+
+
+
+
+The function has been developed to allow variables other than wind
+speed to be plotted with wind direction in polar coordinates. The key
+issue is that the other variable plotted against wind direction should
+be discriminating in some way. For example, temperature can help
+reveal high-level sources brought down to ground level in unstable
+atmospheric conditions, or show the effect a source emission dependent
+on temperature e.g. biogenic isoprene. For research applications where
+many more variables could be available, discriminating sources by
+these other variables could be very insightful.
+
+Bivariate polar plots are constructed in the following way. First,
+wind speed, wind direction and concentration data are partitioned into
+wind speed-direction bins and the mean concentration calculated for
+each bin. Testing on a wide range of data suggests that wind direction
+intervals at 10~degrees and 30 wind speed intervals capture sufficient
+detail of the concentration distribution. The wind direction data
+typically available are generally rounded to 10~degrees and for
+typical surface measurements of wind speed in the range 0 to 20 to
+30~\ms, intervals greater than 30 would be difficult to justify based
+on a consideration of the accuracy of the instruments. Binning the
+data in this way is not strictly necessary but acts as an effective
+data reduction technique without affecting the fidelity of the plot
+itself. Furthermore, because of the inherent wind direction
+variability in the atmosphere, data from several weeks, months or
+years typically used to construct a bivariate polar plot tends to be
+diffuse and does not vary abruptly with either wind direction or speed
+and more finely resolved bin sizes or working with the raw data
+directly does not yield more information.
+
+## Example of use
 
 The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
 
@@ -24,31 +93,31 @@ The `html_vignette` template includes a basic CSS theme. To override this theme 
       rmarkdown::html_vignette:
         css: mystyles.css
 
-## Figures
+## Conditional Probability Function
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+## Comparing two pollutants
 
-```{r, fig.show='hold',fig.cap="My Figure."}
-plot(1:10)
-```
+## References
 
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+1.  Carslaw, D.C., Beevers, S.D, Ropkins, K and M.C. Bell (2006). 
+ Detecting and quantifying aircraft and other on-airport 
+ contributions to ambient nitrogen oxides in the vicinity of a 
+ large international airport.  Atmospheric Environment. 40/28 pp 
+ 5424-5434.
+ 
+1.  Carslaw, D.C., & Beevers, S.D. (2013). Characterising and 
+ understanding emission sources using bivariate polar plots and 
+ k-means clustering. Environmental Modelling & Software, 40, 
+ 325-329. doi:10.1016/j.envsoft.2012.09.005
+ 
+1.  Uria-Tellaetxe, I. and D.C. Carslaw (2014). Source identification 
+ using a conditional bivariate Probability function. Environmental Modelling & Software, Vol. 59, 1-9. [open access version](http://www.sciencedirect.com/science/article/pii/S1364815214001339).
+ 
+1.  Westmoreland, E.J., N. Carslaw, D.C. Carslaw, A. Gillah and E.
+ Bates (2007).  Analysis of air quality within a street canyon 
+ using statistical and dispersion modelling techniques. Atmospheric
+ Environment. Vol.  41(39), pp. 9195-9205.
+ 
+1. Grange, S. K., Lewis, A. C. and D. C. Carslaw (2016). Source apportionment 
+ advances with bivariate polar plots, correlation, and regression techniques.
+ Atmospheric Environment. 145, 128-134. [open access version](http://www.sciencedirect.com/science/article/pii/S1352231016307166).
