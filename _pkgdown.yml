@@ -1,0 +1,10 @@
+templates:
+  params:
+    bootswatch: flatly
+    
+navbar:
+  left:
+  - text: Intro
+    href: articles/introduction.html
+  - text: Reference
+    href: reference/index.html
