@@ -1222,6 +1222,8 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
     
   }
   
+  
+  
   # Quantile regression with weights
   if (grepl("quantile", statistic, ignore.case = TRUE)) {
     
@@ -1230,14 +1232,22 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
     
     # Build model
     suppressWarnings(
-      fit <- quantreg::rq(thedata[[pol_1]] ~ thedata[[pol_2]], tau = tau, 
-                          weights = thedata[["weight"]], method = "br")
+      fit <- try(quantreg::rq(thedata[[pol_1]] ~ thedata[[pol_2]], tau = tau, 
+                          weights = thedata[["weight"]], method = "br"), TRUE)
     )
     
-   
+    if (!inherits(fit, "try-error")) {
+    
     # Extract statistics
     if (statistic == "quantile_slope") stat_weighted <- fit$coefficients[2]
     if (statistic == "quantile_intercept") stat_weighted <- fit$coefficients[1]
+    
+    } else {
+      
+      if (statistic == "quantile_slope") stat_weighted <- NA
+      if (statistic == "quantile_intercept") stat_weighted <- NA
+      
+    }
     
     # Bind together
     result <- data.frame(ws1, wd1, stat_weighted)
