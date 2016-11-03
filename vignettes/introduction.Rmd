@@ -100,6 +100,8 @@ directly does not yield more information.
 
 ## References
 
+1. Carslaw, D.C. and K. Ropkins, (2012). openair --- an R package for air quality data analysis. Environmental Modelling & Software. Volume 27-28, 52-61.
+
 1.  Carslaw, D.C., Beevers, S.D, Ropkins, K and M.C. Bell (2006). 
  Detecting and quantifying aircraft and other on-airport 
  contributions to ambient nitrogen oxides in the vicinity of a 
