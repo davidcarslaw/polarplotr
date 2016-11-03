@@ -9,4 +9,6 @@ NEWS\.md
 README_files
 README_cache
 ^README\.Rmd$
+docs/articles/introduction_cache/*
+vignettes/introduction_cache/*
 

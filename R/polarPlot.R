@@ -1129,6 +1129,8 @@ polarPlot <-
 calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws", 
                                           y = "wd", pol_1, pol_2, 
                                           ws_spread, wd_spread, kernel, tau) {
+  
+  weight <- NULL
   # Centres
   ws1 <- data[[1]]
   wd1 <- data[[2]]
