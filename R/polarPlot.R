@@ -160,10 +160,9 @@
 #' \code{tau} for setting the quantile level).
 #' 
 #' @param resolution Two plot resolutions can be set: \dQuote{normal} 
-#'   (the default) and \dQuote{fine}, for a smoother plot. It should
+#'   and \dQuote{fine} (the default), for a smoother plot. It should
 #'   be noted that plots with a \dQuote{fine} resolution can take
-#'   longer to render and the default option should be sufficient or
-#'   most circumstances.
+#'   longer to render.
 #'   
 #' @param limits The function does its best to choose sensible limits
 #'   automatically. However, there are circumstances when the user
@@ -466,7 +465,7 @@
 #' @export
 polarPlot <- 
   function(mydata, pollutant = "nox", x = "ws", wd = "wd", 
-           type = "default", statistic = "mean", resolution = "normal", 
+           type = "default", statistic = "mean", resolution = "fine", 
            limits = NA, exclude.missing = TRUE, uncertainty = FALSE, 
            percentile = NA, cols = "default", weights = c(0.25, 0.5, 0.75), 
            min.bin = 1, mis.col = "grey", upper = NA, angle.scale = 315,
