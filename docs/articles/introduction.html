@@ -38,7 +38,7 @@
       <h1>Introduction to bivariate polar plots using <code>polarplotr</code></h1>
                         <h4 class="author"><strong>David Carslaw</strong></h4>
             
-            <h4 class="date">2 November 2016</h4>
+            <h4 class="date">3 November 2016</h4>
           </div>
 
     
@@ -46,24 +46,24 @@
 <div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h2>
-<p>This document considers the use of bivariate polar plots applied to air pollution problems.</p>
+<p>This document considers the use of bivariate polar plots applied to air pollution problems. Since the development of the <strong>openair</strong> package, which first made available the <code>polarPlot</code> function, there have been many further developments. These include:</p>
+<ol style="list-style-type: decimal"><li>Clustering of polar plot concetration surfaces (Carslaw and Beevers, 2013).</li>
+<li>Development of a bivarate Conditional Probability Function (Uria-Tellaetxe and Carslaw, 2014).</li>
+<li>Extension to considering two pollutant species and a range of pair-wise statistics (Grange et al., 2016).</li>
+</ol><p>This document summarises the main use of the polar plot functions with examples using real air quality data,</p>
 <p>The <code>polarPlot</code> function plots a <em>bivariate polar plot</em> of concentrations. Concentrations are shown to vary by wind speed and wind direction.</p>
 <p>For many, maybe most situations, increasing wind speed generally results in lower concentrations due to increased dilution through advection and increased mechanical turbulence. There are, however, many processes that can lead to interesting concentration-wind speed dependencies and we will provide a more theoretical treatment of this in due course. However, below are a few reasons why concentrations can change with increasing wind speeds.</p>
 <ul><li><p>Buoyant plumes from tall stacks can be brought down to ground-level resulting in high concentrations under high wind speed conditions.</p></li>
 <li><p>Particle suspension increases with increasing wind speeds e.g. from spoil heaps and the like.</p></li>
-<li><p>`Particle&rsquo; suspension can be important close to coastal areas where higher wind speeds generate more sea spray.</p></li>
+<li><p>&lsquo;Particle&rsquo; suspension can be important close to coastal areas where higher wind speeds generate more sea spray.</p></li>
 <li><p>The wind speed dependence of concentrations in a street canyon can be very complex: higher wind speeds do not always results in lower concentrations due to re-circulation. Bivariate polar plots are very good at revealing these complexities.</p></li>
-<li><p>As  showed, aircraft emissions have an unusual wind speed dependence and this can help distinguish them from other sources. If several measurement sites are available, polar plots can be used to triangulate different sources.</p></li>
-<li><p>Concentrations of can increase with increasing wind speed &mdash; or at least not decline steeply due to increased mixing. This mixing can result in -rich air converting NO to .</p></li>
+<li><p>As Carslaw et al. (2006) showed, aircraft emissions have an unusual wind speed dependence and this can help distinguish them from other sources. If several measurement sites are available, polar plots can be used to triangulate different sources.</p></li>
+<li><p>Concentrations of NO<sub>2</sub> can increase with increasing wind speed &mdash; or at least not decline steeply due to increased mixing. This mixing can result in O<sub>3</sub> -rich air converting NO to NO<sub>2</sub>.</p></li>
 </ul><p>The function has been developed to allow variables other than wind speed to be plotted with wind direction in polar coordinates. The key issue is that the other variable plotted against wind direction should be discriminating in some way. For example, temperature can help reveal high-level sources brought down to ground level in unstable atmospheric conditions, or show the effect a source emission dependent on temperature e.g.&nbsp;biogenic isoprene. For research applications where many more variables could be available, discriminating sources by these other variables could be very insightful.</p>
 <p>Bivariate polar plots are constructed in the following way. First, wind speed, wind direction and concentration data are partitioned into wind speed-direction bins and the mean concentration calculated for each bin. Testing on a wide range of data suggests that wind direction intervals at 10~degrees and 30 wind speed intervals capture sufficient detail of the concentration distribution. The wind direction data typically available are generally rounded to 10~degrees and for typical surface measurements of wind speed in the range 0 to 20 to 30~, intervals greater than 30 would be difficult to justify based on a consideration of the accuracy of the instruments. Binning the data in this way is not strictly necessary but acts as an effective data reduction technique without affecting the fidelity of the plot itself. Furthermore, because of the inherent wind direction variability in the atmosphere, data from several weeks, months or years typically used to construct a bivariate polar plot tends to be diffuse and does not vary abruptly with either wind direction or speed and more finely resolved bin sizes or working with the raw data directly does not yield more information.</p>
 </div>
 <div id="example-of-use" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#example-of-use" class="anchor"> </a></body></html>Example of use</h2>
-<p>The <code>html_vignette</code> template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:</p>
-<pre><code>output: 
-  rmarkdown::html_vignette:
-    css: mystyles.css</code></pre>
 </div>
 <div id="conditional-probability-function" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#conditional-probability-function" class="anchor"> </a></body></html>Conditional Probability Function</h2>
@@ -73,7 +73,8 @@
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#references" class="anchor"> </a></body></html>References</h2>
-<ol style="list-style-type: decimal"><li><p>Carslaw, D.C., Beevers, S.D, Ropkins, K and M.C. Bell (2006). Detecting and quantifying aircraft and other on-airport contributions to ambient nitrogen oxides in the vicinity of a large international airport. Atmospheric Environment. 40/28 pp 5424-5434.</p></li>
+<ol style="list-style-type: decimal"><li><p>Carslaw, D.C. and K. Ropkins, (2012). openair &mdash; an R package for air quality data analysis. Environmental Modelling &amp; Software. Volume 27-28, 52-61.</p></li>
+<li><p>Carslaw, D.C., Beevers, S.D, Ropkins, K and M.C. Bell (2006). Detecting and quantifying aircraft and other on-airport contributions to ambient nitrogen oxides in the vicinity of a large international airport. Atmospheric Environment. 40/28 pp 5424-5434.</p></li>
 <li><p>Carslaw, D.C., &amp; Beevers, S.D. (2013). Characterising and understanding emission sources using bivariate polar plots and k-means clustering. Environmental Modelling &amp; Software, 40, 325-329. <a href="doi:10.1016/j.envsoft.2012.09.005" class="uri">doi:10.1016/j.envsoft.2012.09.005</a></p></li>
 <li><p>Uria-Tellaetxe, I. and D.C. Carslaw (2014). Source identification using a conditional bivariate Probability function. Environmental Modelling &amp; Software, Vol. 59, 1-9. <a href="http://www.sciencedirect.com/science/article/pii/S1364815214001339">open access version</a>.</p></li>
 <li><p>Westmoreland, E.J., N. Carslaw, D.C. Carslaw, A. Gillah and E. Bates (2007). Analysis of air quality within a street canyon using statistical and dispersion modelling techniques. Atmospheric Environment. Vol. 41(39), pp.&nbsp;9195-9205.</p></li>
