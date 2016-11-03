@@ -5,14 +5,16 @@ polarplotr: bivariate polar plots for air pollution data analysis
 
 Functions to plot bivariate polar plots for air pollution data analysis. **polarplotr** uses [**openair**](https://github.com/davidcarslaw/openair) functions but they have been enhanced to consider pair-wise statistics to compare two pollutants through correlation and regression.
 
+The package documentation is in development and can be found <http://davidcarslaw.github.io/polarplotr/>.
+
 For the main **openair** website, see <http://davidcarslaw.github.io/openair/>.
 
-An accompanying publication outlining the package developments can be found [here](http://www.sciencedirect.com/science/article/pii/S1352231016307166). The package documentation is in development and can be found [here](http://davidcarslaw.github.io/polarplotr/docs/).
+An accompanying publication outlining the package developments can be found [here](http://www.sciencedirect.com/science/article/pii/S1352231016307166).
 
 Installation
 ------------
 
-**polarplotr** has not been released on CRAN yet, therefore the development version must be installed. The best way to do this is to install the **devtools** package and use the `install_github` function. However, if you are using a Windows system, [Rtools](https://cran.r-project.org/bin/windows/Rtools/) needs to be installed before installation of **devtools** is attempted. For macOS and Linux systems, this step is not needed and to install **polarplotr**, do this:
+**polarplotr** has not been released on CRAN yet, therefore the development version must be installed. The best way to do this is to install the **devtools** package and use the `install_github` function:
 
 ``` r
 # If needed, install Rtools
