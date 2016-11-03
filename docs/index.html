@@ -45,13 +45,10 @@
 <p>Functions to plot bivariate polar plots for air pollution data analysis. <strong>polarplotr</strong> uses <a href="https://github.com/davidcarslaw/openair"><strong>openair</strong></a> functions but they have been enhanced to consider pair-wise statistics to compare two pollutants through correlation and regression.</p>
 <p>The package documentation is in development and can be found <a href="http://davidcarslaw.github.io/polarplotr/" class="uri">http://davidcarslaw.github.io/polarplotr/</a>.</p>
 <p>For the main <strong>openair</strong> website, see <a href="http://davidcarslaw.github.io/openair/" class="uri">http://davidcarslaw.github.io/openair/</a>.</p>
-<p>An accompanying publication outlining the package developments can be found <a href="http://www.sciencedirect.com/science/article/pii/S1352231016307166">here</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor"><a href="#installation" class="anchor"> </a>Installation</h2>
 <p><strong>polarplotr</strong> has not been released on CRAN yet, therefore the development version must be installed. The best way to do this is to install the <strong>devtools</strong> package and use the <code>install_github</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># If needed, install Rtools</span>
-
-<span class="co"># If needed, install devtools</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># If needed, install devtools</span>
 <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
 
 <span class="co"># Install development version of polarplotr</span>
@@ -74,7 +71,11 @@ data_mary &lt;-<span class="st"> </span><span class="kw">importAURN</span>(<span
 
 <span class="co"># How about the slope, with a newer colour map, will take a minute or two...</span>
 <span class="kw"><a href="reference/polarPlot.html">polarPlot</a></span>(data_mary, <span class="dt">pollutant =</span> <span class="kw">c</span>(<span class="st">"pm2.5"</span>, <span class="st">"pm10"</span>), <span class="dt">statistic =</span> <span class="st">"robust_slope"</span>,
-          <span class="dt">cols =</span> <span class="st">"inferno"</span>)</code></pre></div>
+          <span class="dt">cols =</span> <span class="st">"inferno"</span>)
+
+<span class="co"># use quantile regression and median slope (tau = 0.5)</span>
+<span class="kw"><a href="reference/polarPlot.html">polarPlot</a></span>(data_mary, <span class="dt">pollutant =</span> <span class="kw">c</span>(<span class="st">"pm2.5"</span>, <span class="st">"pm10"</span>), <span class="dt">statistic =</span> <span class="st">"quantile_slope"</span>,
+          <span class="dt">tau =</span> <span class="fl">0.5</span>, <span class="dt">cols =</span> <span class="st">"inferno"</span>)</code></pre></div>
 </div>
 </div>
 </div>

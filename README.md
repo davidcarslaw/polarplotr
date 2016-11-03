@@ -9,16 +9,12 @@ The package documentation is in development and can be found <http://davidcarsla
 
 For the main **openair** website, see <http://davidcarslaw.github.io/openair/>.
 
-An accompanying publication outlining the package developments can be found [here](http://www.sciencedirect.com/science/article/pii/S1352231016307166).
-
 Installation
 ------------
 
 **polarplotr** has not been released on CRAN yet, therefore the development version must be installed. The best way to do this is to install the **devtools** package and use the `install_github` function:
 
 ``` r
-# If needed, install Rtools
-
 # If needed, install devtools
 install.packages("devtools")
 
@@ -51,4 +47,8 @@ polarPlot(data_mary, pollutant = c("pm2.5", "pm10"), statistic = "r")
 # How about the slope, with a newer colour map, will take a minute or two...
 polarPlot(data_mary, pollutant = c("pm2.5", "pm10"), statistic = "robust_slope",
           cols = "inferno")
+
+# use quantile regression and median slope (tau = 0.5)
+polarPlot(data_mary, pollutant = c("pm2.5", "pm10"), statistic = "quantile_slope",
+          tau = 0.5, cols = "inferno")
 ```
