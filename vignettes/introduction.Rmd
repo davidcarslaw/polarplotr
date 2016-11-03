@@ -14,7 +14,13 @@ vignette: >
 
 ## Introduction
 
-This document considers the use of bivariate polar plots applied to air pollution problems.
+This document considers the use of bivariate polar plots applied to air pollution problems. Since the development of the **openair** package, which first made available the `polarPlot` function, there have been many further developments. These include:
+
+1. Clustering of polar plot concetration surfaces (Carslaw and Beevers, 2013).
+1. Development of a bivarate Conditional Probability Function (Uria-Tellaetxe and Carslaw, 2014).
+1. Extension to considering two pollutant species and a range of pair-wise statistics (Grange et al., 2016).
+
+This document summarises the main use of the polar plot functions with examples using real air quality data,
 
 The `polarPlot` function plots a *bivariate polar plot* of
 concentrations. Concentrations are shown to vary by wind speed and
@@ -36,7 +42,7 @@ change with increasing wind speeds.
 - Particle suspension increases with increasing wind speeds
   e.g. \pmten from spoil heaps and the like.
 
-- `Particle' suspension can be important close to coastal areas
+- 'Particle' suspension can be important close to coastal areas
   where higher wind speeds generate more sea spray.
 
 - The wind speed dependence of concentrations in a street canyon
@@ -44,14 +50,14 @@ change with increasing wind speeds.
   lower concentrations due to re-circulation. Bivariate polar plots are
   very good at revealing these complexities.
 
-- As \textcite{Carslaw2006a} showed, aircraft emissions have an unusual
+- As Carslaw et al. (2006) showed, aircraft emissions have an unusual
   wind speed dependence and this can help distinguish them from other
   sources. If several measurement sites are available, polar plots can
   be used to triangulate different sources.
 
-- Concentrations of \notwo can increase with increasing wind speed
+- Concentrations of NO~2~ can increase with increasing wind speed
   --- or at least not decline steeply due to increased mixing. This
-  mixing can result in \ozone-rich air converting NO to \notwo.
+  mixing can result in O~3~ -rich air converting NO to NO~2~.
 
 
 
@@ -87,11 +93,6 @@ directly does not yield more information.
 
 ## Example of use
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
 
 ## Conditional Probability Function
 
