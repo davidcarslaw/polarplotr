@@ -87,7 +87,7 @@ is carried out using <code>mgcv</code>.</p>
     
 
     <pre><span class='fu'>polarPlot</span>(<span class='no'>mydata</span>, <span class='kw'>pollutant</span> <span class='kw'>=</span> <span class='st'>"nox"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"ws"</span>, <span class='kw'>wd</span> <span class='kw'>=</span> <span class='st'>"wd"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>statistic</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>resolution</span> <span class='kw'>=</span> <span class='st'>"normal"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>statistic</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>resolution</span> <span class='kw'>=</span> <span class='st'>"fine"</span>,
   <span class='kw'>limits</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>exclude.missing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>uncertainty</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>percentile</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>),
   <span class='kw'>min.bin</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>mis.col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>angle.scale</span> <span class='kw'>=</span> <span class='fl'>315</span>,
@@ -186,10 +186,9 @@ estimate the slope for a particular quantile level (see also
 <code>tau</code> for setting the quantile level).</dd>
       <dt>resolution</dt>
       <dd>Two plot resolutions can be set: &#8220;normal&#8221; 
-(the default) and &#8220;fine&#8221;, for a smoother plot. It should
+and &#8220;fine&#8221; (the default), for a smoother plot. It should
 be noted that plots with a &#8220;fine&#8221; resolution can take
-longer to render and the default option should be sufficient or
-most circumstances.</dd>
+longer to render.</dd>
       <dt>limits</dt>
       <dd>The function does its best to choose sensible limits
 automatically. However, there are circumstances when the user
@@ -504,7 +503,7 @@ Atmospheric Environment. 145, 128-134. <a href = 'http://www.sciencedirect.com/s
 <span class='co'># Use openair 'mydata'</span>
 
 <span class='co'># basic plot</span>
-<span class='fu'>polarPlot</span>(<span class='kw'>openair</span><span class='kw'>::</span><span class='no'>mydata</span>, <span class='kw'>pollutant</span> <span class='kw'>=</span> <span class='st'>"nox"</span>)</div><img src='polarPlot-2.png' alt='' width='540' height='400' /><div class='input'>
+<span class='fu'>polarPlot</span>(<span class='kw'>openair</span><span class='kw'>::</span><span class='no'>mydata</span>, <span class='kw'>pollutant</span> <span class='kw'>=</span> <span class='st'>"nox"</span>)</div><div class='output co'>#&gt; |======================================================|100% ~0 s remaining     </div><img src='polarPlot-3.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'>## Not run: ------------------------------------</span>
 <span class='co'># </span>
 <span class='co'># # polarPlots by year on same scale</span>

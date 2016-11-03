@@ -4,4 +4,5 @@
 .Ruserdata
 README_cache/*
 docs/README_cache/*
+docs/articles/introduction_cache/*
 vignettes/introduction_cache/*

@@ -59,12 +59,39 @@
 <li><p>The wind speed dependence of concentrations in a street canyon can be very complex: higher wind speeds do not always results in lower concentrations due to re-circulation. Bivariate polar plots are very good at revealing these complexities.</p></li>
 <li><p>As Carslaw et al. (2006) showed, aircraft emissions have an unusual wind speed dependence and this can help distinguish them from other sources. If several measurement sites are available, polar plots can be used to triangulate different sources.</p></li>
 <li><p>Concentrations of NO<sub>2</sub> can increase with increasing wind speed &mdash; or at least not decline steeply due to increased mixing. This mixing can result in O<sub>3</sub> -rich air converting NO to NO<sub>2</sub>.</p></li>
-</ul><p>The function has been developed to allow variables other than wind speed to be plotted with wind direction in polar coordinates. The key issue is that the other variable plotted against wind direction should be discriminating in some way. For example, temperature can help reveal high-level sources brought down to ground level in unstable atmospheric conditions, or show the effect a source emission dependent on temperature e.g.&nbsp;biogenic isoprene. For research applications where many more variables could be available, discriminating sources by these other variables could be very insightful.</p>
-<p>Bivariate polar plots are constructed in the following way. First, wind speed, wind direction and concentration data are partitioned into wind speed-direction bins and the mean concentration calculated for each bin. Testing on a wide range of data suggests that wind direction intervals at 10~degrees and 30 wind speed intervals capture sufficient detail of the concentration distribution. The wind direction data typically available are generally rounded to 10~degrees and for typical surface measurements of wind speed in the range 0 to 20 to 30~, intervals greater than 30 would be difficult to justify based on a consideration of the accuracy of the instruments. Binning the data in this way is not strictly necessary but acts as an effective data reduction technique without affecting the fidelity of the plot itself. Furthermore, because of the inherent wind direction variability in the atmosphere, data from several weeks, months or years typically used to construct a bivariate polar plot tends to be diffuse and does not vary abruptly with either wind direction or speed and more finely resolved bin sizes or working with the raw data directly does not yield more information.</p>
-</div>
+</ul></div>
 <div id="example-of-use" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#example-of-use" class="anchor"> </a></body></html>Example of use</h2>
-</div>
+<p>For these examples use will be made of air quality data from the UK and surface meteorological data from the <code>worldmet</code> package, available <a href="https://github.com/davidcarslaw/worldmet">here</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(openair)
+<span class="kw">library</span>(polarplotr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(worldmet)
+
+<span class="co"># import data from London North Kensington</span>
+north_ken &lt;-<span class="st"> </span><span class="kw">importAURN</span>(<span class="dt">site =</span> <span class="st">"kc1"</span>, <span class="dt">year =</span> <span class="dv">2013</span>)
+
+<span class="co"># import met data for site Heathrow London (which is the default)</span>
+met &lt;-<span class="st"> </span><span class="kw">importNOAA</span>(<span class="dt">year =</span> <span class="dv">2013</span>)
+
+<span class="co"># merge together, drop model met from north_ken</span>
+north_ken &lt;-<span class="st"> </span><span class="kw">inner_join</span>(<span class="kw">select</span>(north_ken, -ws, -wd),
+                        met, <span class="dt">by =</span> <span class="st">"date"</span>)</code></pre></div>
+<p>We will also use data from a kerbside site (Marylebone Road).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import data from London Marylebone Road</span>
+mary &lt;-<span class="st"> </span><span class="kw">importAURN</span>(<span class="dt">site =</span> <span class="st">"my1"</span>, <span class="dt">year =</span> <span class="dv">2013</span>)
+
+<span class="co"># merge together, drop model met from north_ken</span>
+mary &lt;-<span class="st"> </span><span class="kw">inner_join</span>(<span class="kw">select</span>(mary, -ws, -wd),
+                        met, <span class="dt">by =</span> <span class="st">"date"</span>)</code></pre></div>
+<p>Basic polar plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/polarPlot.html">polarPlot</a></span>(north_ken, <span class="dt">pollutant =</span> <span class="st">"nox"</span>, <span class="dt">col =</span> <span class="st">"jet"</span>)</code></pre></div>
+<p><img src="introduction_files/figure-html/unnamed-chunk-4-1.png" width="300"></p>
+<p>Useful options for <code>polarPlot</code> include:</p>
+<ul><li><code>x</code>, the variable for the radial axis (wind speed by default). The radial axis can be any numeric variable. The choice of variable depends on teh application but is usually chosen to help differentiate sources in some way e.g.&nbsp;air temperature or a measure of atmospheric stability.</li>
+<li><code>limits</code> to set the colour scale limits e.g. <code>limits = c(0, 100)</code>. This is useful for ensuring the same scale across different plots.</li>
+<li><code>k</code>, which controls the smoothing parameter. Generally it is not necessary to adjust <code>k</code> but if there are too few data it can be difficult to fit a smooth surface. Reducing k e.g.&nbsp;to 50 or below might help produce a plot.</li>
+</ul></div>
 <div id="conditional-probability-function" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#conditional-probability-function" class="anchor"> </a></body></html>Conditional Probability Function</h2>
 </div>
