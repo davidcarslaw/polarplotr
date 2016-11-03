@@ -1167,6 +1167,9 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
   thedata <- select_(mydata, pol_1, pol_2, "weight")
   thedata <- thedata[complete.cases(thedata), ]
   
+  # don't fit all data - takes too long with no gain
+  thedata <- filter(thedata, weight > 0.001)
+  
   # useful for showing what the weighting looks like as a surface
   # openair::scatterPlot(mydata, x = "ws", y = "wd", z = "weight", method = "level")
   
@@ -1189,12 +1192,9 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
     # Calculate model, no warnings on perfect fits.
     fit <- lm(thedata[, pol_1] ~ thedata[, pol_2], weights = thedata[, "weight"])
     
-    # Get coefficents, no warnings on perfect fits
-    suppressWarnings(fit <- broom::tidy(fit))
-    
     # Extract statistics
-    if (statistic == "slope") stat_weighted <- fit[2, 2]
-    if (statistic == "intercept") stat_weighted <- fit[1, 2]
+    if (statistic == "slope") stat_weighted <- fit$coefficients[22]
+    if (statistic == "intercept") stat_weighted <- fit$coefficients[1]
     
     # Bind together
     result <- data.frame(ws1, wd1, stat_weighted)
@@ -1212,13 +1212,11 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
       MASS::rlm(thedata[, pol_1] ~ thedata[, pol_2], 
                 weights = thedata[, "weight"], method = "M")
     )
+   
     
-    # Get coefficents
-    fit <- broom::tidy(fit)
-
     # Extract statistics
-    if (statistic == "robust_slope") stat_weighted <- fit[2, 2]
-    if (statistic == "robust_intercept") stat_weighted <- fit[1, 2]
+    if (statistic == "robust_slope") stat_weighted <- fit$coefficients[2]
+    if (statistic == "robust_intercept") stat_weighted <- fit$coefficients[1]
     
     # Bind together
     result <- data.frame(ws1, wd1, stat_weighted)
@@ -1233,16 +1231,14 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
     
     # Build model
     suppressWarnings(
-      fit <- quantreg::rq(thedata[, pol_1] ~ thedata[, pol_2], tau = tau, 
-                          weights = thedata[, "weight"], method = "br")
+      fit <- quantreg::rq(thedata[[pol_1]] ~ thedata[[pol_2]], tau = tau, 
+                          weights = thedata[["weight"]], method = "br")
     )
     
-    # Get coefficents
-    fit <- broom::tidy(fit)
-    
+   
     # Extract statistics
-    if (statistic == "quantile_slope") stat_weighted <- fit[2, 2]
-    if (statistic == "quantile_intercept") stat_weighted <- fit[1, 2]
+    if (statistic == "quantile_slope") stat_weighted <- fit$coefficients[2]
+    if (statistic == "quantile_intercept") stat_weighted <- fit$coefficients[1]
     
     # Bind together
     result <- data.frame(ws1, wd1, stat_weighted)

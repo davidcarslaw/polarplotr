@@ -1,8 +1,8 @@
 Package: polarplotr
 Type: Package
 Title: Bivariate polar plots for air pollution data analysis
-Version: 0.1-0
-Date: 2016-11-01
+Version: 0.2-0
+Date: 2016-11-03
 Authors@R: c(
   person("David", "Carslaw",  email = "david.carslaw@york.ac.uk", role = "aut"),
   person("Stuart", "Grange", email = "s.k.grange@gmail.com", role = c("cre", "aut")))
@@ -21,7 +21,6 @@ Imports:
     latticeExtra,
     grid,
     RColorBrewer,
-    broom, 
     MASS,
     quantreg,
     reshape2,
