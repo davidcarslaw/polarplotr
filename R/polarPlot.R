@@ -1210,14 +1210,24 @@ calculate_weighted_statistics <- function(data, mydata, statistic, x = "ws",
     
     # Build model, optimal method (MM) cannot use weights
     fit <- suppressWarnings(
-      MASS::rlm(thedata[, pol_1] ~ thedata[, pol_2], 
-                weights = thedata[, "weight"], method = "M")
+      try(MASS::rlm(thedata[, pol_1] ~ thedata[, pol_2], 
+                weights = thedata[, "weight"], method = "M"), TRUE)
     )
    
     
     # Extract statistics
-    if (statistic == "robust_slope") stat_weighted <- fit$coefficients[2]
-    if (statistic == "robust_intercept") stat_weighted <- fit$coefficients[1]
+    if (!inherits(fit, "try-error")) {
+      
+      # Extract statistics
+      if (statistic == "robust_slope") stat_weighted <- fit$coefficients[2]
+      if (statistic == "robust_intercept") stat_weighted <- fit$coefficients[1]
+      
+    } else {
+      
+      if (statistic == "robust_slope") stat_weighted <- NA
+      if (statistic == "robust_intercept") stat_weighted <- NA
+      
+    }
     
     # Bind together
     result <- data.frame(ws1, wd1, stat_weighted)
