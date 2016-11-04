@@ -485,7 +485,7 @@ polarPlot <-
     }
     
     # Allow for period notation
-    statistic <- stringr::str_replace_all(statistic, "\\.| ", "_")
+    statistic <- gsub("\\.| ", "_", statistic)
     
     # Build vector for many checks
     correlation_stats <- c("r", "slope", "intercept", "robust_slope", 
@@ -1276,7 +1276,7 @@ corr <- function(d, w = rep(1, nrow(d)) / nrow(d)) {
 
 # From enlightenr package
 kernel_smoother <- function(x, kernel = "gaussian") {
-  kernel <- stringr::str_to_lower(kernel)
+  kernel <- tolower(kernel)
   if (kernel %in% c("gaussian", "normal")) 
     x <- (2 * pi)^-0.5 * exp(-0.5 * x^2)
   if (kernel == "epanechnikov") 
