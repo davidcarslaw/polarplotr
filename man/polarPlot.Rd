@@ -61,45 +61,46 @@ Type can be up length two e.g. \code{type = c("season",
 the week. Note, when two types are provided the first forms the 
 columns and the second the rows.}
 
-\item{statistic}{The statistic that should be applied to each wind
-  speed/direction bin. Can be \dQuote{mean} (default), 
-  \dQuote{median}, \dQuote{max} (maximum), \dQuote{frequency}. 
-  \dQuote{stdev} (standard deviation), \dQuote{weighted.mean}, 
-  \dQuote{cpf} (Conditional Probability Function) or \dQuote{r}
-  (correlation coefficient). Because of the smoothing involved,
-  the colour scale for some of these statistics is only to provide
-  an indication of overall pattern and should not be interpreted
-  in concentration units e.g. for \code{statistic =
-  "weighted.mean"} where the bin mean is multiplied by the bin
-  frequency and divided by the total frequency. In many cases
-  using \code{polarFreq} will be better. Setting \code{statistic =
-  "weighted.mean"} can be useful because it provides an indication
-  of the concentration * frequency of occurrence and will
-  highlight the wind speed/direction conditions that dominate the
-  overall mean.
-  
-  When \code{statistic = "cpf"} the conditional probability 
-  function (CPF) is plotted and a single (usually high) percentile
-  level is supplied. The CPF is defined as CPF = my/ny, where my 
-  is the number of samples in the y bin (by default a wind 
-  direction, wind speed interval) with mixing ratios greater than 
-  the \emph{overall} percentile concentration, and ny is the total
-  number of samples in the same wind sector (see Ashbaugh et al., 
-  1985). Note that percentile intervals can also be considered; 
-  see \code{percentile} for details.
-  
-When \code{statistic = "r"}, the Pearson correlation coefficient is
-calculated for \emph{two} pollutants. The calculation involves a
-weighted Pearson correlation coefficient, which is weighted by
-Gaussian kernels for wind direction an the radial variable (by
-default wind speed). More weight is assigned to values close to a
-wind speed-direction interval. Kernel weighting is used to ensure
-that all data are used rather than relying on the potentially small
-number of values in a wind speed-direction interval.
-\code{"robust.slope"} is another option for pair-wise statisitics
-and \code{"quantile.slope"}, which uses quantile regression to
-estimate the slope for a particular quantile level (see also
-\code{tau} for setting the quantile level).}
+\item{statistic}{The statistic that should be applied to each wind 
+speed/direction bin. Because of the smoothing involved, the
+colour scale for some of these statistics is only to provide an
+indication of overall pattern and should not be interpreted in
+concentration units e.g. for \code{statistic = "weighted.mean"}
+where the bin mean is multiplied by the bin frequency and divided
+by the total frequency. In many cases using \code{polarFreq} will
+be better. Setting \code{statistic = "weighted.mean"} can be
+useful because it provides an indication of the concentration *
+frequency of occurrence and will highlight the wind
+speed/direction conditions that dominate the overall mean.Can be:
+
+\itemize{ \item  \dQuote{mean} (default), \dQuote{median},
+\dQuote{max} (maximum), \dQuote{frequency}. \dQuote{stdev}
+(standard deviation), \dQuote{weighted.mean}
+
+\item \code{statistic = "cpf"} the conditional probability 
+function (CPF) is plotted and a single (usually high) percentile 
+level is supplied. The CPF is defined as CPF = my/ny, where my is
+the number of samples in the y bin (by default a wind direction,
+wind speed interval) with mixing ratios greater than the
+\emph{overall} percentile concentration, and ny is the total 
+number of samples in the same wind sector (see Ashbaugh et al., 
+1985). Note that percentile intervals can also be considered; see
+\code{percentile} for details.
+
+\item When \code{statistic = "r"}, the Pearson correlation
+coefficient is calculated for \emph{two} pollutants. The
+calculation involves a weighted Pearson correlation coefficient,
+which is weighted by Gaussian kernels for wind direction an the
+radial variable (by default wind speed). More weight is assigned
+to values close to a wind speed-direction interval. Kernel
+weighting is used to ensure that all data are used rather than
+relying on the potentially small number of values in a wind
+speed-direction interval.
+
+\item \code{"robust.slope"} is another option for pair-wise
+statisitics and \code{"quantile.slope"}, which uses quantile
+regression to estimate the slope for a particular quantile level
+(see also \code{tau} for setting the quantile level). }}
 
 \item{resolution}{Two plot resolutions can be set: \dQuote{normal} 
 and \dQuote{fine} (the default), for a smoother plot. It should
